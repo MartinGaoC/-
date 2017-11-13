@@ -56,11 +56,16 @@
 </template>
 <script>
   const LENGTH = 5
-  const CLS_ON = 'ON'
+  const CLS_ON = 'on'
   const CLS_HALF = 'half'
   const CLS_OFF = 'off'
 
   export default {
+    props: {
+      size: {
+        type: Number
+      }
+    },
     data () {
       return {
         url: '/api/seller'
@@ -71,11 +76,12 @@
         return this.$store.state.seller
       },
       starType () {
-        return 'star-' + this.item.size
+        return 'star-' + this.size
       },
       itemClasses () {
+        // console.log(this.item.score)
         let result = []
-        let score = Math.floor(this.score * 2) / 2
+        let score = Math.floor(this.item.score * 2) / 2
         let hasDecimal = score % 1 !== 0
         let integer = Math.floor(score)
         for (let i = 0; i < integer; i++) {

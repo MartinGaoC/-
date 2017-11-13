@@ -78,7 +78,7 @@
         font-size 10px
         line-height 24px
   .bulletin-warpper
-    position relative
+    position relative  
     height 28px
     line-height 28px
     padding 0 22px 0 12px
@@ -130,17 +130,22 @@
           text-align center
           font-size 16px
           font-weight 700
+        .star-wrapper
+          margin-top 18px
+          padding 2px 0
+          text-align center
       .title
         display flex
         width 80%
-        margin 30px auto 24px auto
+        margin 28px auto 24px auto
         .line
           flex 1
           position relative
           top -6px
-          border-bottom 1px solid white
+          border-bottom 1px solid rgba(255,255,255,0.2)
         .text
           padding 0 12px
+          font-weight 700
           font-size 14px
     .detail-close
       position relative
@@ -185,12 +190,18 @@
     <div class="detail-wrapper clearfix">
       <div class="detail-main">
         <h1 class="name">{{item.name}}</h1>
+        <star :size='48' :score='item.score' class="star-wrapper"></star>
       </div>
       <div class="title">
         <div class="line"></div>
         <div class="text">优惠信息</div>
         <div class="line"></div>
       </div>
+      <ul v-if="item.supports" class="supports">
+        <li class="support-item" v-for="item in item.supports">
+          <span class="icon"></span>
+        </li>
+      </ul>
     </div>
     <div class="detail-close">
       <i class="icon-close"></i>
@@ -199,7 +210,7 @@
 </div>
 </template>
 <script>
-// import Star from '../star/star.vue'
+ import Star from '../star/star'
  export default {
    name: 'HeaderNav',
    data () {
@@ -208,9 +219,9 @@
        detailShow: false
      }
    },
-//   components: {
-//     Star
-//   },
+   components: {
+     Star
+   },
    created () {
      this.getData()
      this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
